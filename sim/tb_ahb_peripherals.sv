@@ -29,7 +29,7 @@ module tb_ahb_peripherals;
     @(posedge HCLK); #1;
   endtask
 
-  task automatic expect(input logic condition, input string label);
+  task automatic check_result(input logic condition, input string label);
     if (condition) $display("PASS %s", label);
     else begin $display("FAIL %s", label); failures++; end
   endtask
@@ -42,19 +42,19 @@ module tb_ahb_peripherals;
     repeat (3) @(posedge HCLK); HRESETn <= 1; repeat (2) @(posedge HCLK);
     if (scenario == "timer-registers") begin
       write_word(32'h40000004, 3); write_word(32'h40000000, 7); repeat (5) @(posedge HCLK);
-      read_word(32'h4000000C, value); expect(value[0] && timer_irq, "terminal count sets pending and IRQ");
-      write_word(32'h4000000C, 0); read_word(32'h4000000C, value); expect(value[0], "zero write does not clear pending");
-      write_word(32'h4000000C, 1); expect(!timer_irq, "W1C acknowledgement clears IRQ");
+      read_word(32'h4000000C, value); check_result(value[0] && timer_irq, "terminal count sets pending and IRQ");
+      write_word(32'h4000000C, 0); read_word(32'h4000000C, value); check_result(value[0], "zero write does not clear pending");
+      write_word(32'h4000000C, 1); check_result(!timer_irq, "W1C acknowledgement clears IRQ");
     end else if (scenario == "gpio-sevenseg") begin
       write_word(32'h4001000C, 3); gpio_input <= 1; @(posedge HCLK); gpio_input <= 0; repeat (2) @(posedge HCLK);
-      read_word(32'h40010008, value); expect(value[0] && gpio_irq, "GPIO edge latches event");
+      read_word(32'h40010008, value); check_result(value[0] && gpio_irq, "GPIO edge latches event");
       write_word(32'h40020000, 20'h01015); write_word(32'h40020004, 5'h1F);
-      expect(display_digits == 20'h01015 && display_enable == 5'h1F, "five-digit MMSS.t storage");
+      check_result(display_digits == 20'h01015 && display_enable == 5'h1F, "five-digit MMSS.t storage");
     end else if (scenario == "interrupt-integration") begin
-      expect(1'b0, "complete firmware and Renode interrupt integration before this scenario can pass");
+      check_result(1'b0, "complete firmware and Renode interrupt integration before this scenario can pass");
     end else if (scenario == "stopwatch-project") begin
-      expect(1'b0, "complete all four deterministic firmware scenarios before the project can pass");
-    end else expect(1'b0, "known scenario");
+      check_result(1'b0, "complete all four deterministic firmware scenarios before the project can pass");
+    end else check_result(1'b0, "known scenario");
     $fwrite(irq_file, "{\"timerIrq\":%0d,\"gpioIrq\":%0d}\n", timer_irq, gpio_irq);
     $fwrite(event_file, "scenario=%s failures=%0d\n", scenario, failures);
     $fwrite(uart_file, "%c", uart_tx_valid ? uart_tx_data : 8'h2D);
