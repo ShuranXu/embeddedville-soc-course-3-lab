@@ -17,8 +17,8 @@ jobs:
         with:
           persist-credentials: false
       - run: python3 -m unittest discover -s tests -v
-      - name: Lint the incomplete starter and open testbench
-        run: docker run --rm --network none --security-opt no-new-privileges --cap-drop ALL -v "$PWD:/work:ro" -w /work ghcr.io/shuranxu/embeddedville-soc-course-2-lab-devcontainer@sha256:632bdb4fa495760de0c1ff50786b0dafe6eb2b0f1089d7cee45e5c96080f27ab bash -lc 'verilator --lint-only --timing -Wall -Wno-fatal rtl/course3_soc.sv sim/tb_course3.sv'
+      - name: Lint the incomplete AHB starter and open testbench
+        run: docker run --rm --network none --security-opt no-new-privileges --cap-drop ALL -v "$PWD:/work:ro" -w /work ghcr.io/shuranxu/embeddedville-soc-course-2-lab-devcontainer@sha256:632bdb4fa495760de0c1ff50786b0dafe6eb2b0f1089d7cee45e5c96080f27ab bash -lc 'verilator --lint-only --timing -Wall -Wno-fatal rtl/ahb_peripherals.sv sim/tb_ahb_peripherals.sv && arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -ffreestanding -Wall -Wextra -Werror -Ifirmware/include -c firmware/src/drivers.c -o /tmp/drivers.o && arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -ffreestanding -Wall -Wextra -Werror -Ifirmware/include -c firmware/src/stopwatch.c -o /tmp/stopwatch.o && arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -c firmware/startup/startup.S -o /tmp/startup.o'
       - name: Reject protected or sibling-course material
         shell: bash
         run: |

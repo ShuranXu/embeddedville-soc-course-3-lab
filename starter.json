@@ -2,13 +2,23 @@
   "courseId": "interrupt-driven-soc-peripherals",
   "repository": "ShuranXu/embeddedville-soc-course-3-lab",
   "ref": "main",
-  "starterVersion": "course-3-v1.0.1",
+  "starterVersion": "course-3-v2.0.0",
+  "courseVersion": "2026.10-soc-public-v2",
   "activities": [
     "timer-registers",
     "gpio-sevenseg",
     "interrupt-integration",
     "stopwatch-project"
   ],
-  "sourceFiles": ["rtl/course3_soc.sv", "starter.json", "design-note.md"],
-  "evidenceSchema": 3
+  "sourceFiles": [
+    "rtl/ahb_peripherals.sv",
+    "firmware/startup/startup.S",
+    "firmware/linker.ld",
+    "firmware/include/soc.h",
+    "firmware/src/drivers.c",
+    "firmware/src/stopwatch.c",
+    "starter.json",
+    "design-note.md"
+  ],
+  "evidenceSchema": 4
 }
