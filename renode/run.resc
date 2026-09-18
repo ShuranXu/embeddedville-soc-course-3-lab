@@ -1,0 +1,7 @@
+using sysbus
+mach create "embeddedville-course3"
+machine LoadPlatformDescription $ORIGIN/soc.repl
+sysbus LoadELF $ORIGIN/../build/firmware/course3_stopwatch.elf
+logLevel 2
+# The protected integration runner supplies the Verilator co-simulation endpoint,
+# connects `peripherals`, and asserts processor-visible IRQ ordering.

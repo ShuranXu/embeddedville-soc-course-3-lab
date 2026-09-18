@@ -2,11 +2,11 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ShuranXu/embeddedville-soc-course-3-lab/tree/main?quickstart=1)
 
-This is the solution-free starter for the paid **Interrupt-Driven SoC Peripherals** course. It contains only the Course 3 RTL interface, open tests, learner instructions, and private evidence-packaging tools. Detailed teaching, submission access, and the completion certificate remain in the paid classroom and EmbeddedVille assessment portal.
+This is the solution-free starter for the paid **Interrupt-Driven SoC Peripherals** course. It contains a real AHB-Lite peripheral bank, GNU Cortex-M0 startup and linker files, typed register definitions, drivers, an intentionally incomplete stopwatch application, open tests, and private evidence-packaging tools. Complete manuals, submissions, and certificate progress stay in the protected EmbeddedVille course workspace.
 
 ## First action
 
-Open [docs/activities.md](docs/activities.md), edit `rtl/course3_soc.sv`, and run one activity:
+Open the matching EmbeddedVille manual, inspect [docs/activities.md](docs/activities.md), and work only in the files named by that phase. Begin with:
 
 ```sh
 ./lab test --scenario timer-registers
@@ -15,22 +15,24 @@ Open [docs/activities.md](docs/activities.md), edit `rtl/course3_soc.sv`, and ru
 ./lab test --scenario stopwatch-project
 ```
 
-The starter is intentionally incomplete, so the first test should fail. Verilator is the execution authority. A passing local run creates real `results.json`, `trace.vcd`, `uart.log`, and display/event evidence from the current source. Package that exact state with:
+The starter is intentionally incomplete, so each first scenario should fail meaningfully. `./lab build` compiles the GNU Cortex-M0 firmware and the Verilator bus-functional model. Passing local runs create schema-4 results, AHB and IRQ traces, tool and firmware manifests, UART/event logs, and display state from the current source. Package that exact state with:
 
 ```sh
 ./lab package --scenario timer-registers
 ```
 
-Upload the ZIP on the matching paid-course assessment page. EmbeddedVille verifies its Course 3 identity and source digest, then runs separate protected scenarios. Editing a local result cannot approve an activity. The project passes only at 80/100 or higher with every critical gate passing.
+Upload the ZIP at the end of the matching paid-course lab or project manual. EmbeddedVille verifies the Course 3 v2 identity and source digest, rebuilds submitted RTL and firmware, and runs separate protected scenarios. Editing a local result cannot approve an activity. The project passes only at 80/100 or higher with every critical gate passing.
 
 ## Workspace identity
 
 - Course: `interrupt-driven-soc-peripherals`
 - Repository/ref: `ShuranXu/embeddedville-soc-course-3-lab@main`
-- Starter: `course-3-v1.0.1`
+- Starter: `course-3-v2.0.0`
+- Course version: `2026.10-soc-public-v2`
+- Evidence schema: `4`
 - Dev container: `.devcontainer/devcontainer.json`
 - Working directory: repository root
-- File to edit: `rtl/course3_soc.sv`
+- Learner source: `rtl/ahb_peripherals.sv`, `firmware/startup/startup.S`, `firmware/include/soc.h`, `firmware/src/drivers.c`, and `firmware/src/stopwatch.c`
 - Readiness check: `./lab doctor`
 
 If `starter.json` or `git status` shows a different identity, preserve your edits in a private commit or exported patch before pulling, rebuilding, or creating a new Codespace.

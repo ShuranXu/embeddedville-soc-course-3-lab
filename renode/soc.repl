@@ -1,0 +1,20 @@
+rom: Memory.MappedMemory @ sysbus 0x00000000
+    size: 0x00010000
+ram: Memory.MappedMemory @ sysbus 0x20000000
+    size: 0x00010000
+nvic: IRQControllers.NVIC @ sysbus 0xE000E000
+    priorityMask: 0xC0
+    systickFrequency: 1000000
+    IRQ -> cpu@0
+cpu: CPU.CortexM @ sysbus
+    cpuType: "cortex-m0"
+    nvic: nvic
+    performanceInMips: 1
+peripherals: CoSimulated.CoSimulatedPeripheral @ sysbus <0x40000000, +0x40000>
+    address: "127.0.0.1"
+    timeout: 10000
+    limitBuffer: 1000000
+    maxWidth: 32
+    cosimToRenodeSignalRange: <0, +2>
+    0 -> nvic@0
+    1 -> nvic@1
