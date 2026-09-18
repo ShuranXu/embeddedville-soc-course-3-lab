@@ -1,0 +1,15 @@
+{
+  "name": "EmbeddedVille SoC Course 3",
+  "build": { "dockerfile": "Dockerfile", "context": ".." },
+  "remoteUser": "vscode",
+  "hostRequirements": { "cpus": 2, "memory": "4gb", "storage": "16gb" },
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "Private evidence viewer", "onAutoForward": "silent", "visibility": "private" }
+  },
+  "postCreateCommand": "./lab doctor && python3 -m unittest discover -s tests -v",
+  "customizations": {
+    "vscode": { "extensions": ["mshr-h.veriloghdl"] }
+  }
+}
+

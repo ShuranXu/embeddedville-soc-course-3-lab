@@ -1,0 +1,14 @@
+{
+  "courseId": "interrupt-driven-soc-peripherals",
+  "repository": "ShuranXu/embeddedville-soc-course-3-lab",
+  "ref": "main",
+  "starterVersion": "course-3-v1.0.0",
+  "activities": [
+    "timer-registers",
+    "gpio-sevenseg",
+    "interrupt-integration",
+    "stopwatch-project"
+  ],
+  "sourceFiles": ["rtl/course3_soc.sv", "starter.json", "design-note.md"],
+  "evidenceSchema": 3
+}
