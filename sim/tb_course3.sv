@@ -64,16 +64,16 @@ module tb_course3;
     endtask
 
     task automatic integration_activity;
-        logic [15:0] before;
+        logic [15:0] value_before_pause;
         press(2'b01);
         wait_for_tenths(1, 40);
-        before = elapsed_tenths;
+        value_before_pause = elapsed_tenths;
         // Align a pause event with the next timer event window.
         repeat (2) @(posedge clk);
         press(2'b01);
         repeat (3) @(posedge clk);
         check_condition(!running, "button interrupt pauses the stopwatch");
-        check_condition(elapsed_tenths <= before + 1, "simultaneous events have deterministic button priority");
+        check_condition(elapsed_tenths <= value_before_pause + 1, "simultaneous events have deterministic button priority");
         check_condition(button_ack_pulse || !button_irq, "button event is acknowledged");
     endtask
 

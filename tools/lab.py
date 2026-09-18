@@ -16,7 +16,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build"
 SCENARIOS = ("timer-registers", "gpio-sevenseg", "interrupt-integration", "stopwatch-project")
-STARTER_VERSION = "course-3-v1.0.0"
+STARTER_VERSION = "course-3-v1.0.1"
 SOURCE_FILES = ("rtl/course3_soc.sv", "starter.json", "design-note.md")
 
 
