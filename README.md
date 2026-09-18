@@ -27,7 +27,7 @@ Upload the ZIP on the matching paid-course assessment page. EmbeddedVille verifi
 
 - Course: `interrupt-driven-soc-peripherals`
 - Repository/ref: `ShuranXu/embeddedville-soc-course-3-lab@main`
-- Starter: `course-3-v1.0.0`
+- Starter: `course-3-v1.0.1`
 - Dev container: `.devcontainer/devcontainer.json`
 - Working directory: repository root
 - File to edit: `rtl/course3_soc.sv`
@@ -46,4 +46,3 @@ A normal rebuild preserves files under `/workspaces` and clears changes outside 
 The workspace requests no access to sibling repositories and uses no course secrets. Port 8000 is private and optional; `./lab serve` exposes only local evidence to your authenticated Codespaces session. Stop the server when finished.
 
 Use is governed by [LICENSE-COURSE-USE.md](LICENSE-COURSE-USE.md).
-

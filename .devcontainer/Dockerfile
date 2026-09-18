@@ -22,5 +22,5 @@ RUN curl -fL "https://github.com/verilator/verilator/archive/refs/tags/v${VERILA
     rm -rf /tmp/verilator /tmp/verilator.tar.gz
 
 ENV PATH="/opt/verilator/bin:${PATH}" \
-    EMBEDDEDVILLE_STARTER_VERSION="course-3-v1.0.0"
+    EMBEDDEDVILLE_STARTER_VERSION="course-3-v1.0.1"
 WORKDIR /workspaces/embeddedville-soc-course-3-lab
